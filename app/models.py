@@ -18,11 +18,14 @@ class Student(db.Model):
 class Teacher(db.Model):
     __tablename__ = "teachers"
     id = db.Column(db.Integer, primary_key=True)
-    fullname = db.Column(db.String, nullable=False)
-    gender = db.Column(db.String, nullable=False)
-    phone = db.Column(db.Integer, nullable=False, unique=True)
-    email = db.Column(db.String, nullable=False, unique=True)
-    child = db.relationship("Subject", backref="teachers", uselist=False)
+    name = db.Column(db.String, nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+    birthday = db.Column(db.String)
+    sex = db.Column(db.String, nullable=False)
+    contact = db.Column(db.String, nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey("class.id"))
+    timetable = db.relationship("TimeTable", backref="teacher", lazy=True)
+
 
 
 class Subject(db.Model):
